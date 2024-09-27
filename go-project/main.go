@@ -51,7 +51,7 @@ func main() {
 	fmt.Printf("Inserted document with ID: %v\n", insertResult.InsertedID)
 	fmt.Printf("********************************************************* \n")
 	showAllDocuments(collection)
-	runOrderService()
+
 	defer func() {
 		if err = client.Disconnect(context.TODO()); err != nil {
 			log.Fatalf("Failed to disconnect from the database: %v", err)
