@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/kr/pretty"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -38,6 +39,22 @@ func main() {
 
 	showAllDocuments(collection)
 
+	updateResult, err := collection.UpdateOne(context.TODO(), bson.D{{"name", "K.B.L.L Heshan"}}, bson.D{{"$set", bson.D{{"email", "example.com"}}}})
+	if err != nil {
+		log.Fatalf("Failed to update document: %v", err)
+	}
+	fmt.Printf("Updated %v document(s)\n", updateResult.ModifiedCount)
+
+	searchDocument(collection, "K.B.L.L Heshan")
+
+	deleteResult, err := collection.DeleteOne(context.TODO(), bson.D{{"name", "K.B.L.L Heshan"}})
+	if err != nil {
+		log.Fatalf("Failed to delete document: %v", err)
+	}
+	fmt.Printf("Deleted %v document(s)\n", deleteResult.DeletedCount)
+
+	showAllDocuments(collection)
+
 	defer func() {
 		if err = client.Disconnect(context.TODO()); err != nil {
 			log.Fatalf("Failed to disconnect from the database: %v", err)
@@ -59,10 +76,21 @@ func showAllDocuments(collection *mongo.Collection) {
 		if err != nil {
 			log.Fatalf("Failed to decode document: %v", err)
 		}
-		fmt.Println(result)
+		pretty.Println(result)
 	}
 
 	if err := cursor.Err(); err != nil {
 		log.Fatalf("Error occurred during cursor iteration: %v", err)
 	}
+}
+
+func searchDocument(collection *mongo.Collection, name string) {
+	var result bson.M
+	err := collection.FindOne(context.TODO(), bson.D{{"name", name}}).Decode(&result)
+	if err != nil {
+		log.Printf("Failed to find document with name %s: %v\n", name, err)
+		return
+	}
+	fmt.Println("Found document:")
+	pretty.Println(result)
 }
