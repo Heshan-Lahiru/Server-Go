@@ -13,22 +13,19 @@ import (
 )
 
 func main() {
-	// Load environment variables from .env file
+
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalf("Error loading .env file")
 	}
 
-	// Get MongoDB URI from environment variable
 	mongoURI := os.Getenv("MONGODB_URI")
 	if mongoURI == "" {
 		log.Fatalf("MONGODB_URI not set in .env file")
 	}
 
-	// Set up MongoDB client options
 	clientOptions := options.Client().ApplyURI(mongoURI)
 
-	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatalf("Failed to connect to the database: %v", err)
@@ -42,7 +39,6 @@ func main() {
 
 	collection := client.Database("data").Collection("data")
 
-	// Inserting a document
 	document := bson.D{
 		{"name", "John Doe"},
 		{"email", "john.doe@example.com"},
@@ -53,7 +49,6 @@ func main() {
 	}
 	fmt.Printf("Inserted document with ID: %v\n", insertResult.InsertedID)
 
-	// Show all documents
 	showAllDocuments(collection)
 
 	defer func() {
@@ -63,7 +58,6 @@ func main() {
 	}()
 }
 
-// Function to retrieve and display all documents
 func showAllDocuments(collection *mongo.Collection) {
 	cursor, err := collection.Find(context.TODO(), bson.D{})
 	if err != nil {
@@ -78,7 +72,7 @@ func showAllDocuments(collection *mongo.Collection) {
 		if err != nil {
 			log.Fatalf("Failed to decode document: %v", err)
 		}
-		fmt.Println(result) // Plain output
+		fmt.Println(result)
 	}
 
 	if err := cursor.Err(); err != nil {
