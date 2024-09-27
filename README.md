@@ -1,4 +1,5 @@
 # Server-Go
 
-![Screenshot (185)](https://github.com/user-attachments/assets/accfdbc4-c506-42be-bfe0-21efbd37a888)
+
+![Screenshot (186)](https://github.com/user-attachments/assets/9fe1491a-d38a-4b2a-b34f-87011ecd8c21)
 
