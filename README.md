@@ -13,6 +13,25 @@ This project demonstrates a simple Go application that connects to a **MongoDB**
   - Delete a document
 - 🎨 Beautified terminal output using the `pretty` package
 
+# Food Ordering System
+
+A simple Go application for managing food orders, connecting to a MongoDB database.
+
+## Features
+
+- Create, read, update, and delete food orders
+- Store orders in a MongoDB database
+- Simple command-line interface
+
+## Getting Started
+
+### Prerequisites
+
+- Go (version 1.15 or later)
+- MongoDB Atlas account
+- `godotenv` package for managing environment variables
+
+
 ## Project Structure 📂
 
 ## Prerequisites 🛠️
@@ -33,7 +52,8 @@ Make sure you have the following installed:
 Install required dependencies: go mod tidy
 
 
-![Screenshot (186)](https://github.com/user-attachments/assets/9fe1491a-d38a-4b2a-b34f-87011ecd8c21)
+
+![Screenshot (189)](https://github.com/user-attachments/assets/18f03c37-b5cf-46c6-ab53-bdfcd5037a09)
 
 
 
