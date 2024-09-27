@@ -47,8 +47,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to insert document: %v", err)
 	}
+	fmt.Printf("********************************************************* \n")
 	fmt.Printf("Inserted document with ID: %v\n", insertResult.InsertedID)
-
+	fmt.Printf("********************************************************* \n")
 	showAllDocuments(collection)
 
 	defer func() {
@@ -72,7 +73,9 @@ func showAllDocuments(collection *mongo.Collection) {
 		if err != nil {
 			log.Fatalf("Failed to decode document: %v", err)
 		}
+		fmt.Printf("********************************************************* \n")
 		fmt.Println(result)
+		fmt.Printf("********************************************************* \n")
 	}
 
 	if err := cursor.Err(); err != nil {
